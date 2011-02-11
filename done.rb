@@ -1,13 +1,22 @@
 #!/usr/bin/ruby
 
-require "yaml"
-
-# Filename    : dawn.rb
+# Filename    : done.rb
 # Created     : 2011-01-10
 # Description : Keep a track of what you've done in a fast and single command line.
 # Author      : Taurus Olson <taurusolson@gmail.com>
 
+require "yaml"
+
 FILE = File.join(ENV['DROP'], 'dawn.yml')
+
+# Check that a file where the notes will be stored exist
+# If not, create one
+if not File.exists? FILE
+    new_file = File.join(ENV['HOME'], 'dawn.yml')
+    File.new(new_file)
+    puts "#{new_file} has been created."
+end
+
 
 def print_info(entry)
     if entry['tags']
@@ -44,7 +53,7 @@ end
 
 
 # Enter a new thing done
-if ARGV.size > 1
+if ARGV.size > 0
     msg = ARGV[0]
     tags = ARGV[1..-1]
     write_info(FILE, msg, tags)
