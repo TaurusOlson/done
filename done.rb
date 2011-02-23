@@ -8,6 +8,7 @@
 require "yaml"
 
 FILE = File.join(ENV['DROP'], 'dawn.yml')
+EDITOR = ENV['EDITOR']
 
 # Check that a file where the notes will be stored exist
 # If not, create one
@@ -59,7 +60,7 @@ if ARGV.size > 0
     write_info(FILE, msg, tags)
 end
 
-if ARGV.size == 1 and ARGV[0] != "|"
+if ARGV.size == 1 and ARGV[0] != "|" and ARGV[0] != "-e"
     tag = ARGV[0]
     f     = File.read FILE
     r_obj = YAML::load(f)
@@ -72,9 +73,8 @@ if ARGV.size == 1 and ARGV[0] != "|"
                 end
             end
         end
-
-        # if entry['tags'].start_with? tag
-            # print_info entry
-        # end
     end
+
+elsif ARGV.size == 1 and ARGV[0] == "-e"
+    system("#{EDITOR} #{FILE}")
 end
