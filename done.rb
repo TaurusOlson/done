@@ -7,7 +7,7 @@
 
 require "yaml"
 
-FILE = File.join(ENV['DROP'], 'dawn.yml')
+FILE = File.join(ENV['DROP'], 'DrLists', 'dawn.yml')
 EDITOR = ENV['EDITOR']
 
 # Check that a file where the notes will be stored exist
