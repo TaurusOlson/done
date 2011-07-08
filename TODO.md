@@ -7,3 +7,4 @@
     - [ ] Add "-e" option for file edition
     - [ ] Add "-f" option for full format display ({num} {date} {entry})
     - [ ] Add "-d {num}" option for entry deletion
+    - [ ] Fix grep option
