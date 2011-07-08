@@ -7,8 +7,12 @@
 
 require "yaml"
 
-FILE = File.join(ENV['DROP'], 'DrLists', 'dawn.yml')
-EDITOR = ENV['EDITOR']
+FILE    = File.join(ENV['DROP'], 'DrLists', 'dawn.yml')
+EDITOR  = ENV['EDITOR']
+OPTIONS = {'edit' => '-e',
+           'grep' => '-g',
+           'pipe' => '|'}
+
 
 # Check that a file where the notes will be stored exist
 # If not, create one
@@ -60,7 +64,9 @@ if ARGV.size > 0
     write_info(FILE, msg, tags)
 end
 
-if ARGV.size == 1 and ARGV[0] != "|" and ARGV[0] != "-e"
+
+# Grep tags
+if ARGV.size == 1 and not OPTIONS.has_value? ARGV[0]
     tag = ARGV[0]
     f     = File.read FILE
     r_obj = YAML::load(f)
@@ -75,6 +81,7 @@ if ARGV.size == 1 and ARGV[0] != "|" and ARGV[0] != "-e"
         end
     end
 
-elsif ARGV.size == 1 and ARGV[0] == "-e"
+
+elsif ARGV.size == 1 and ARGV[0] == OPTIONS['edit']
     system("#{EDITOR} #{FILE}")
 end

@@ -66,3 +66,6 @@ of tags in order to bring a bit of organization in all those messy notes.
             - [11/2/11] Read a tutorial about DSL in Ruby |tuto, ruby|
 
 
+# TODO
+* Fix grep option
+
